@@ -97,3 +97,6 @@ ninja
 
 # Ignore vscode folder
 .vscode/
+subprojects/Mutationpp
+externals/ninja
+externals/meson
