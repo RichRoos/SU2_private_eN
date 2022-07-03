@@ -25,9 +25,6 @@
  * License along with SU2. If not, see <http://www.gnu.org/licenses/>.
  */
 
-//Test change for PR
-//Test2
-
 #include "../include/SU2_CFD.hpp"
 
 /* LIBXSMM include files, if supported. */
