@@ -22,7 +22,16 @@ if build_machine.system() != 'windows'
     default_warning_flags += ['-Wno-empty-body']
   endif
   default_warning_flags += ['-Wno-unused-parameter',
-                            '-Wno-deprecated-declarations']
+                            '-Wno-deprecated-declarations',
+                            '-Wno-error=cast-function-type',
+                            '-Wno-cast-function-type',
+                            '-Wno-error=stringop-truncation',
+                            '-Wno-stringop-truncation',
+                            '-Wno-error=missing-field-initializers',
+                            '-Wno-missing-field-initializers',
+                            '-Wno-error=class-memaccess',
+                            '-Wno-class-memaccess'
+  ]
 
   if get_option('enable-autodiff') or get_option('enable-directdiff')
     default_warning_flags += ['-Wno-non-virtual-dtor']
@@ -303,4 +312,8 @@ if get_option('enable-librom')
           
           '''.format(get_option('librom_root')))
 
+endif
+
+if get_option('enable-pywrapper') and get_option('enable-cgns') and not get_option('static-cgns-deps')
+  message(''' WARNING: If compilation fails with a message regarding "attempted static link of dynamic object", reconfigure with option -Dstatic-cgns-deps=true.''')
 endif

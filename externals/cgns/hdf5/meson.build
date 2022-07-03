@@ -11,7 +11,11 @@ else
                            '-Wno-error=maybe-uninitialized',
                            '-Wno-error=unused-function',
                            '-Wno-error=unused-label',
-                           '-Wno-pedantic']
+                           '-Wno-pedantic',
+                           '-Wno-error=stringop-truncation',
+                           '-Wno-error=cast-function-type',
+                           '-Wno-stringop-truncation'
+                           ]
 endif
 
 cc = meson.get_compiler('c')
@@ -24,9 +28,8 @@ hdf5_conf_data.set('version', '1.12.1')
 
 ext_deps = []
 
-
-opt_zlib = dependency('zlib', required: false, static: true)
-opt_szip = dependency('szip', required: false, static: true)
+opt_zlib = dependency('zlib', required: false, static: get_option('static-cgns-deps'))
+opt_szip = dependency('szip', required: false, static: get_option('static-cgns-deps'))
 
 if opt_zlib.found() and cc.has_header('zlib.h')
   if cc.has_function('inflate', dependencies: opt_zlib, prefix: '#include <zlib.h>')
